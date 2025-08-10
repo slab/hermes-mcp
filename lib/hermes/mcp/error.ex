@@ -61,6 +61,7 @@ defmodule Hermes.MCP.Error do
   @error_messages %{
     parse_error: "Parse error",
     invalid_request: "Invalid Request",
+    session_not_initialized: "Session not initialized",
     method_not_found: "Method not found",
     invalid_params: "Invalid params",
     internal_error: "Internal error",
@@ -106,6 +107,15 @@ defmodule Hermes.MCP.Error do
       code: @invalid_request,
       reason: :invalid_request,
       message: @error_messages.invalid_request,
+      data: data
+    }
+  end
+
+  def protocol(:session_not_initialized, data) do
+    %__MODULE__{
+      code: @server_error,
+      reason: :session_not_initialized,
+      message: @error_messages.session_not_initialized,
       data: data
     }
   end

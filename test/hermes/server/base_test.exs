@@ -51,7 +51,7 @@ defmodule Hermes.Server.BaseTest do
     test "rejects requests when not initialized", %{server: server} do
       request = build_request("tools/list", 123)
 
-      assert {:ok, _} =
+      assert {:error, %{reason: :session_not_initialized}} =
                GenServer.call(server, {:request, request, "not_initialized", %{}})
     end
 
