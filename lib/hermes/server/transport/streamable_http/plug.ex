@@ -258,6 +258,12 @@ if Code.ensure_loaded?(Plug) do
           |> maybe_add_session_header(session_header, session_id)
           |> send_resp(200, response)
 
+        {:error, %Error{reason: :session_not_initialized}} ->
+          conn
+          |> put_resp_content_type("application/json")
+          |> maybe_add_session_header(session_header, session_id)
+          |> send_resp(404, "Re-initialize the session")
+
         {:error, error} ->
           handle_request_error(conn, error, body)
       end

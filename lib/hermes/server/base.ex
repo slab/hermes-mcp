@@ -378,15 +378,15 @@ defmodule Hermes.Server.Base do
   end
 
   defp handle_server_not_initialized(state) do
-    error = Error.protocol(:invalid_request, %{message: "Server not initialized"})
+    error = Error.protocol(:session_not_initialized)
 
     Logging.server_event(
-      "request_error",
-      %{error: error, reason: "not_initialized"},
+      "invalid_session",
+      %{error: error, reason: "Request MCP-Session-Id does not match any active session"},
       level: :warning
     )
 
-    {:reply, {:ok, Error.build_json_rpc(error)}, state}
+    {:reply, {:error, error}, state}
   end
 
   defp handle_invalid_request(state) do
