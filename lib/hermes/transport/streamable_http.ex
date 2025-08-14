@@ -83,7 +83,7 @@ defmodule Hermes.Transport.StreamableHTTP do
     name: {{:custom, &Hermes.genserver_name/1}, {:default, __MODULE__}},
     client: {:required, Hermes.get_schema(:process_name)},
     base_url: {:required, {:string, {:transform, &URI.new!/1}}},
-    mcp_path: {:string, {:default, "/mcp/"}},
+    mcp_path: {:string, {:default, "/"}},
     headers: {:map, {:default, %{}}},
     transport_opts: {:any, {:default, []}},
     http_options: {:any, {:default, []}},
